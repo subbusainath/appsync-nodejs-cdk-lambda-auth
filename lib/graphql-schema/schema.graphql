@@ -1,0 +1,28 @@
+type Note  @aws_lambda {
+    id: ID!
+    name: String!
+    completed: Boolean!
+}
+
+input NoteInput {
+    id: ID!
+    name: String!
+    completed: Boolean!   
+}
+
+input UpdateNoteInput {
+    id: ID!
+    name: String
+    completed: Boolean
+}
+
+type Query {
+    getNoteById(noteId: String!): Note @aws_lambda
+    listNotes: [Note] @aws_lambda
+}
+
+type Mutation {
+    createNote(note: NoteInput!): Note @aws_lambda
+    updateNote(note: UpdateNoteInput!): Note @aws_lambda
+    deleteNote(noteId: String!): String @aws_lambda
+}
